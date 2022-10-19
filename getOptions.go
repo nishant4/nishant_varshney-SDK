@@ -12,11 +12,11 @@ type GetOptions struct {
 
 	Match       map[string][]string // param -> values. Ex - race -> Elf,Human
 	NotMatch    map[string][]string
-	GreaterThan map[string]int
-	LessThan    map[string]int
+	GreaterThan map[string]int // key > value
+	LessThan    map[string]int // key < value
 
-	SortKey string
-	SortAsc bool // defaults false
+	SortKey string // key to sort on
+	SortAsc bool   // order for the sort, defaults false
 }
 
 func (this *GetOptions) GetParams() map[string]string {
