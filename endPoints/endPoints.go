@@ -12,4 +12,10 @@ const (
 	LIST_MOVIES      = "list_movies"
 	GET_MOVIE        = "get_movie"
 	GET_MOVIE_QUOTES = "get_movie_quotes"
+
+	LIST_QUOTES = "list_quotes"
+	GET_QUOTE   = "get_quote"
+
+	LIST_CHAPTERS = "list_chapters"
+	GET_CHAPTER   = "get_chapter"
 )

@@ -32,6 +32,22 @@ func TestMovies(t *testing.T) {
 	if movie.Movies[0] != movieList.Movies[0] {
 		t.Errorf("GetMovie: Characters should match: %v != %v", movie.Movies[0], movieList.Movies[0])
 	}
+
+	// options
+	offset := 3
+	options := lotr.NewGetOptionsOffset(offset)
+	movieList, err = app.ListMoviesOptions(options)
+	if err != nil {
+		t.Error("Error ListMovies ", err)
+	}
+
+	if movieList.Total != TOTAL_MOVIES {
+		t.Errorf("Wrong Total Characters: %d != %d (Should be)", movieList.Total, TOTAL_MOVIES)
+	}
+
+	if len(movieList.Movies) != TOTAL_MOVIES-offset {
+		t.Errorf("Movies Count with offset: %d != %d(Should be)", len(movieList.Movies), TOTAL_MOVIES)
+	}
 }
 
 func TestMovieQuotes(t *testing.T) {

@@ -55,7 +55,7 @@ func (this *App) GetBook(id string) (*lotrResponse.ListBooks, error) {
 	return result, nil
 }
 
-func (this *App) GetBookChaptersOptions(id string, options *GetOptions) (*lotrResponse.BookChapters, error) {
+func (this *App) GetBookChaptersOptions(id string, options *GetOptions) (*lotrResponse.ListChapters, error) {
 	log.Println("GetBookChaptersOptions called", id)
 	identifiers := map[string]string{
 		"id": id,
@@ -67,7 +67,7 @@ func (this *App) GetBookChaptersOptions(id string, options *GetOptions) (*lotrRe
 		return nil, err
 	}
 
-	var result *lotrResponse.BookChapters
+	var result *lotrResponse.ListChapters
 	if err := json.Unmarshal(resp, &result); err != nil { // Parse []byte to go struct pointer
 		err = fmt.Errorf("Cannot Unmarshal Json : %s : [%w]", id, err)
 		log.Println("GetBookChaptersOptions: Error: ", err)
@@ -78,6 +78,6 @@ func (this *App) GetBookChaptersOptions(id string, options *GetOptions) (*lotrRe
 	return result, nil
 }
 
-func (this *App) GetBookChapters(id string) (*lotrResponse.BookChapters, error) {
+func (this *App) GetBookChapters(id string) (*lotrResponse.ListChapters, error) {
 	return this.GetBookChaptersOptions(id, nil)
 }

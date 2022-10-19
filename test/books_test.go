@@ -9,9 +9,9 @@ import (
 )
 
 const (
-	BOOK_ID          = "5cf5805fb53e011a64671582"
-	TOTAL_BOOK_COUNT = 3
-	TOTAL_CHAPTERS   = 22
+	BOOK_ID             = "5cf5805fb53e011a64671582"
+	TOTAL_BOOK_COUNT    = 3
+	TOTAL_BOOK_CHAPTERS = 22
 )
 
 func TestMain(m *testing.M) {
@@ -53,7 +53,7 @@ func TestGetChapters(t *testing.T) {
 		t.Error("GetBookChapters : Error: ", err)
 	}
 
-	if chapterList.Total != TOTAL_CHAPTERS {
+	if chapterList.Total != TOTAL_BOOK_CHAPTERS {
 		t.Error("GetBookChapters: Wrong total ", chapterList.Total)
 	}
 
@@ -64,11 +64,11 @@ func TestGetChapters(t *testing.T) {
 		t.Error("GetBookChapters : Error: ", err)
 	}
 
-	if chapterList.Total != TOTAL_CHAPTERS {
+	if chapterList.Total != TOTAL_BOOK_CHAPTERS {
 		t.Error("GetBookChapters: Wrong total ", chapterList.Total)
 	}
 
-	if len(chapterList.Chapters) != TOTAL_CHAPTERS-offset {
+	if len(chapterList.Chapters) != TOTAL_BOOK_CHAPTERS-offset {
 		t.Error("GetBookChapters: Wrong total ", chapterList.Total)
 	}
 }

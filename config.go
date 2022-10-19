@@ -30,6 +30,12 @@ func (this *Config) BuildDefaultEndPoints() {
 		endPoints.LIST_MOVIES:      "/movie",
 		endPoints.GET_MOVIE:        "/movie/%{id}s",
 		endPoints.GET_MOVIE_QUOTES: "/movie/%{id}s/quote",
+
+		endPoints.LIST_QUOTES: "/quote",
+		endPoints.GET_QUOTE:   "/quote/%{id}s",
+
+		endPoints.LIST_CHAPTERS: "/chapter",
+		endPoints.GET_CHAPTER:   "/chapter/%{id}s",
 	}
 }
 
