@@ -16,7 +16,7 @@ func TestCharacters(t *testing.T) {
 
 	charList, err := app.ListCharacters()
 	if err != nil {
-		t.Error("Error ListCharacters ", err)
+		t.Fatal("Error ListCharacters ", err)
 	}
 
 	if charList.Total != TOTAL_CHARACTERS {
@@ -26,7 +26,7 @@ func TestCharacters(t *testing.T) {
 	charId := charList.Characters[0].Id
 	char, err := app.GetCharacter(charId)
 	if err != nil {
-		t.Error("GetCharacter : Error: ", err)
+		t.Fatal("GetCharacter : Error: ", err)
 	}
 
 	if char.Characters[0] != charList.Characters[0] {
@@ -40,7 +40,7 @@ func TestCharacterQuotes(t *testing.T) {
 	charQuotes, err := app.GetCharacterQuotes(GANDALF_ID)
 
 	if err != nil {
-		t.Error("Get Error: ", err)
+		t.Fatal("Get Error: ", err)
 	}
 
 	if charQuotes.Total != GANDALF_TOTAL_QUOTES {
@@ -51,7 +51,7 @@ func TestCharacterQuotes(t *testing.T) {
 	charQuotes, err = app.GetCharacterQuotesOptions(GANDALF_ID, lotr.NewGetOptionsOffset(offset))
 
 	if err != nil {
-		t.Error("Get Error: ", err)
+		t.Fatal("Get Error: ", err)
 	}
 
 	if charQuotes.Total != GANDALF_TOTAL_QUOTES {

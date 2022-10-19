@@ -16,7 +16,7 @@ func TestMovies(t *testing.T) {
 
 	movieList, err := app.ListMovies()
 	if err != nil {
-		t.Error("Error ListMovies ", err)
+		t.Fatal("Error ListMovies ", err)
 	}
 
 	if movieList.Total != TOTAL_MOVIES {
@@ -26,7 +26,7 @@ func TestMovies(t *testing.T) {
 	movieId := movieList.Movies[0].Id
 	movie, err := app.GetMovie(movieId)
 	if err != nil {
-		t.Error("GetMovie : Error: ", err)
+		t.Fatal("GetMovie : Error: ", err)
 	}
 
 	if movie.Movies[0] != movieList.Movies[0] {
@@ -38,7 +38,7 @@ func TestMovies(t *testing.T) {
 	options := lotr.NewGetOptionsOffset(offset)
 	movieList, err = app.ListMoviesOptions(options)
 	if err != nil {
-		t.Error("Error ListMovies ", err)
+		t.Fatal("Error ListMovies ", err)
 	}
 
 	if movieList.Total != TOTAL_MOVIES {
@@ -56,7 +56,7 @@ func TestMovieQuotes(t *testing.T) {
 	movieQuotes, err := app.GetMovieQuotes(MOVIE_ID)
 
 	if err != nil {
-		t.Error("Get Error: ", err)
+		t.Fatal("Get Error: ", err)
 	}
 
 	if movieQuotes.Total != TOTAL_MOVIE_QUOTES {
@@ -67,7 +67,7 @@ func TestMovieQuotes(t *testing.T) {
 	movieQuotes, err = app.GetMovieQuotesOptions(MOVIE_ID, lotr.NewGetOptionsOffset(offset))
 
 	if err != nil {
-		t.Error("Get Error: ", err)
+		t.Fatal("Get Error: ", err)
 	}
 
 	if movieQuotes.Total != TOTAL_MOVIE_QUOTES {

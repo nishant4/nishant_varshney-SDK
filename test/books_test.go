@@ -1,10 +1,7 @@
 package main
 
 import (
-	"io/ioutil"
-	"log"
 	"lotr"
-	"os"
 	"testing"
 )
 
@@ -14,18 +11,12 @@ const (
 	TOTAL_BOOK_CHAPTERS = 22
 )
 
-func TestMain(m *testing.M) {
-	log.SetOutput(ioutil.Discard)
-	code := m.Run()
-	os.Exit(code)
-}
-
 func TestBooks(t *testing.T) {
 	app := lotr.New("")
 
 	bookList, err := app.ListBooks()
 	if err != nil {
-		t.Error("Error ListBooks ", err)
+		t.Fatal("Error ListBooks ", err)
 	}
 
 	if bookList.Total != TOTAL_BOOK_COUNT {
@@ -35,7 +26,7 @@ func TestBooks(t *testing.T) {
 	bookId := bookList.Books[0].Id
 	book, err := app.GetBook(bookId)
 	if err != nil {
-		t.Error("GetBook : Error: ", err)
+		t.Fatal("GetBook : Error: ", err)
 	}
 
 	if book.Books[0] != bookList.Books[0] {
@@ -50,7 +41,7 @@ func TestGetChapters(t *testing.T) {
 	// chapters
 	chapterList, err := app.GetBookChapters(BOOK_ID)
 	if err != nil {
-		t.Error("GetBookChapters : Error: ", err)
+		t.Fatal("GetBookChapters : Error: ", err)
 	}
 
 	if chapterList.Total != TOTAL_BOOK_CHAPTERS {
@@ -61,7 +52,7 @@ func TestGetChapters(t *testing.T) {
 	offset := 10
 	chapterList, err = app.GetBookChaptersOptions(BOOK_ID, lotr.NewGetOptionsOffset(offset))
 	if err != nil {
-		t.Error("GetBookChapters : Error: ", err)
+		t.Fatal("GetBookChapters : Error: ", err)
 	}
 
 	if chapterList.Total != TOTAL_BOOK_CHAPTERS {
@@ -80,7 +71,7 @@ func TestBookOffset(t *testing.T) {
 
 	bookList, err := app.ListBooksOptions(options)
 	if err != nil {
-		t.Error("Error ListBooks ", err)
+		t.Fatal("Error ListBooks ", err)
 	}
 
 	if bookList.Total != 3 {
@@ -99,7 +90,7 @@ func TestBookPage(t *testing.T) {
 
 	bookList, err := app.ListBooksOptions(options)
 	if err != nil {
-		t.Error("Error ListBooks ", err)
+		t.Fatal("Error ListBooks ", err)
 	}
 
 	if bookList.Total != 3 {
@@ -119,6 +110,6 @@ func TestOptions(t *testing.T) {
 
 	_, err := app.ListBooksOptions(options)
 	if err == nil {
-		t.Error("Should have thrown offset error ")
+		t.Fatal("Should have thrown offset error ")
 	}
 }

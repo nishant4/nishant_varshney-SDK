@@ -15,7 +15,7 @@ func TestChapters(t *testing.T) {
 
 	chapterList, err := app.ListChapters()
 	if err != nil {
-		t.Error("Error ListChapters ", err)
+		t.Fatal("Error ListChapters ", err)
 	}
 
 	if chapterList.Total != TOTAL_CHAPTERS {
@@ -25,7 +25,7 @@ func TestChapters(t *testing.T) {
 	chapterId := chapterList.Chapters[0].Id
 	chapter, err := app.GetChapter(chapterId)
 	if err != nil {
-		t.Error("GetChapter : Error: ", err)
+		t.Fatal("GetChapter : Error: ", err)
 	}
 
 	if chapter.Chapters[0] != chapterList.Chapters[0] {
@@ -38,7 +38,7 @@ func TestChapters(t *testing.T) {
 	options := lotr.NewGetOptionsPageLimited(maxPage, limit)
 	chapterList, err = app.ListChaptersOptions(options)
 	if err != nil {
-		t.Error("Error ListChaptersOptions ", err)
+		t.Fatal("Error ListChaptersOptions ", err)
 	}
 
 	if chapterList.Total != TOTAL_CHAPTERS {

@@ -14,6 +14,9 @@ type GetOptions struct {
 	NotMatch    map[string][]string
 	GreaterThan map[string]int
 	LessThan    map[string]int
+
+	SortKey string
+	SortAsc bool // defaults false
 }
 
 func (this *GetOptions) GetParams() map[string]string {
@@ -55,6 +58,14 @@ func (this *GetOptions) GetParams() map[string]string {
 		}
 	}
 
+	if this.SortKey != "" {
+		sortType := "desc"
+		if this.SortAsc {
+			sortType = "asc"
+		}
+		params["sort"] = fmt.Sprintf("%s:%s", this.SortKey, sortType)
+	}
+
 	return params
 }
 
@@ -64,6 +75,11 @@ func (this *GetOptions) Validate() error {
 		return err
 	}
 	return nil
+}
+
+func (this *GetOptions) SortOnKey(key string, asc bool) {
+	this.SortKey = key
+	this.SortAsc = asc
 }
 
 func NewGetOptions() *GetOptions {

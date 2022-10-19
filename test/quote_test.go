@@ -15,7 +15,7 @@ func TestQuotes(t *testing.T) {
 
 	quoteList, err := app.ListQuotes()
 	if err != nil {
-		t.Error("Error ListQuotes ", err)
+		t.Fatal("Error ListQuotes ", err)
 	}
 
 	if quoteList.Total != TOTAL_QUOTES {
@@ -25,7 +25,7 @@ func TestQuotes(t *testing.T) {
 	quoteId := quoteList.Quotes[0].Id
 	quote, err := app.GetQuote(quoteId)
 	if err != nil {
-		t.Error("GetQuote : Error: ", err)
+		t.Fatal("GetQuote : Error: ", err)
 	}
 
 	if quote.Quotes[0] != quoteList.Quotes[0] {
@@ -38,7 +38,7 @@ func TestQuotes(t *testing.T) {
 	options := lotr.NewGetOptionsPageLimited(maxPage, limit)
 	quoteList, err = app.ListQuotesOptions(options)
 	if err != nil {
-		t.Error("Error ListQuotesOption ", err)
+		t.Fatal("Error ListQuotesOption ", err)
 	}
 
 	if quoteList.Total != TOTAL_QUOTES {

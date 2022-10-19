@@ -1,6 +1,7 @@
 package network
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -100,7 +101,25 @@ func HttpBearerAuthWithParams(accessToken string, url string, params map[string]
 
 	defer resp.Body.Close()
 
-	return ioutil.ReadAll(resp.Body)
+	bytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var respMap map[string]interface{}
+	err = json.Unmarshal(bytes, &respMap)
+	if err != nil {
+		return nil, err
+	}
+
+	// check if it failed because unauthorized
+	if val, ok := respMap["message"]; ok {
+		if val == "Unauthorized." {
+			return nil, fmt.Errorf("Unauthorized")
+		}
+	}
+
+	return bytes, nil
 }
 
 func HttpBearerAuthEndPointWithParams(accessToken string, address string, endpoint string, params map[string]string) ([]byte, error) {

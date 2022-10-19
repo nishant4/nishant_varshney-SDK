@@ -17,7 +17,7 @@ func (this *Config) GetEndPoint(endp string) string {
 }
 
 // populates the endpoint map with defaults, can be overridden
-func (this *Config) BuildDefaultEndPoints() {
+func (this *Config) buildDefaultEndPoints() {
 	this.EndPoints = map[string]string{
 		endPoints.LIST_BOOKS:        "/book",
 		endPoints.GET_BOOK:          "/book/%{id}s",
@@ -42,6 +42,6 @@ func (this *Config) BuildDefaultEndPoints() {
 func NewConfig(apiRoute string) *Config {
 	conf := new(Config)
 	conf.Route = apiRoute
-	conf.BuildDefaultEndPoints()
+	conf.buildDefaultEndPoints()
 	return conf
 }
