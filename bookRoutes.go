@@ -32,7 +32,7 @@ func (this *App) ListBooks() (*lotrResponse.ListBooks, error) {
 	return this.ListBooksOptions(nil)
 }
 
-func (this *App) GetBook(id string) (*lotrResponse.GetBook, error) {
+func (this *App) GetBook(id string) (*lotrResponse.ListBooks, error) {
 	log.Println("GetBook called", id)
 	identifiers := map[string]string{
 		"id": id,
@@ -44,7 +44,7 @@ func (this *App) GetBook(id string) (*lotrResponse.GetBook, error) {
 		return nil, err
 	}
 
-	var result *lotrResponse.GetBook
+	var result *lotrResponse.ListBooks
 	if err := json.Unmarshal(resp, &result); err != nil { // Parse []byte to go struct pointer
 		err = fmt.Errorf("Cannot Unmarshal Json : %s : [%w]", id, err)
 		log.Println("GetBook: Error: ", err)
@@ -55,47 +55,29 @@ func (this *App) GetBook(id string) (*lotrResponse.GetBook, error) {
 	return result, nil
 }
 
-func (this *App) GetBookChapters(id string) (*lotrResponse.GetBookChapters, error) {
-	log.Println("GetBookChapters called", id)
+func (this *App) GetBookChaptersOptions(id string, options *GetOptions) (*lotrResponse.BookChapters, error) {
+	log.Println("GetBookChaptersOptions called", id)
 	identifiers := map[string]string{
 		"id": id,
 	}
 
-	resp, err := this.ApiOptions(endPoints.GET_BOOK_CHAPTERS, nil, identifiers)
+	resp, err := this.ApiOptions(endPoints.GET_BOOK_CHAPTERS, options, identifiers)
 	if err != nil {
-		log.Println("GetBookChapters: Error: ", err)
+		log.Println("GetBookChaptersOptions: Error: ", err)
 		return nil, err
 	}
 
-	var result *lotrResponse.GetBookChapters
+	var result *lotrResponse.BookChapters
 	if err := json.Unmarshal(resp, &result); err != nil { // Parse []byte to go struct pointer
 		err = fmt.Errorf("Cannot Unmarshal Json : %s : [%w]", id, err)
-		log.Println("GetBookChapters: Error: ", err)
+		log.Println("GetBookChaptersOptions: Error: ", err)
 		return nil, err
 	}
 
-	log.Println("GetBookChapters: Done: ", id)
+	log.Println("GetBookChaptersOptions: Done: ", id)
 	return result, nil
 }
 
-// func (this *App) GetBookChapters(id string) (*lotrResponse.GetBookChapters, error) {
-// 	log.Println("GetBookChapters called", id)
-// 	params := map[string]string{
-// 		"id": id,
-// 	}
-
-// 	resp, err := network.HttpCallWithIdentifiers(this.conf.Route, this.conf.GetEndPoint(endPoints.GET_BOOK_CHAPTERS), params)
-// 	if err != nil {
-// 		log.Println("GetBookChapters: Error: ", id, err)
-// 		return nil, err
-// 	}
-
-// 	var result *lotrResponse.GetBookChapters
-// 	if err := json.Unmarshal(resp, &result); err != nil { // Parse []byte to go struct pointer
-// 		errMsg := fmt.Errorf("GetBookChapters: Cannot Unmarshal Json : %s : [%w]", id, err)
-// 		log.Println(errMsg)
-// 		return nil, errMsg
-// 	}
-// 	log.Println("GetBookChapters: Done: ", id)
-// 	return result, err
-// }
+func (this *App) GetBookChapters(id string) (*lotrResponse.BookChapters, error) {
+	return this.GetBookChaptersOptions(id, nil)
+}

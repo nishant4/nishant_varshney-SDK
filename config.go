@@ -22,7 +22,14 @@ func (this *Config) BuildDefaultEndPoints() {
 		endPoints.LIST_BOOKS:        "/book",
 		endPoints.GET_BOOK:          "/book/%{id}s",
 		endPoints.GET_BOOK_CHAPTERS: "/book/%{id}s/chapter",
-		endPoints.LIST_CHARACTERS:   "/character",
+
+		endPoints.LIST_CHARACTERS:      "/character",
+		endPoints.GET_CHARACTER:        "/character/%{id}s",
+		endPoints.GET_CHARACTER_QUOTES: "/character/%{id}s/quote",
+
+		endPoints.LIST_MOVIES:      "/movie",
+		endPoints.GET_MOVIE:        "/movie/%{id}s",
+		endPoints.GET_MOVIE_QUOTES: "/movie/%{id}s/quote",
 	}
 }
 

@@ -6,16 +6,9 @@ type Book struct {
 }
 
 type ListBooks struct {
-	PaginationInfo
+	BaseResponse
 
 	Books []Book `json:"docs"`
-	Total int    `json:"total"`
-}
-
-type GetBook struct {
-	PaginationInfo
-
-	Book []Book `json:"docs"`
 }
 
 type Chapter struct {
@@ -23,9 +16,8 @@ type Chapter struct {
 	Name string `json:"chapterName"`
 }
 
-type GetBookChapters struct {
-	PaginationInfo
+type BookChapters struct {
+	BaseResponse
 
 	Chapters []Chapter `json:"docs"`
-	Total    int       `json:"total"`
 }

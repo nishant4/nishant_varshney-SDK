@@ -15,7 +15,7 @@ type Character struct {
 }
 
 type ListCharacters struct {
-	PaginationInfo
+	BaseResponse
 
 	Characters []Character `json:"docs"`
 	Total      int         `json:"total"`

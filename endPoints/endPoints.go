@@ -5,5 +5,11 @@ const (
 	GET_BOOK          = "get_book"
 	GET_BOOK_CHAPTERS = "get_book_chapters"
 
-	LIST_CHARACTERS = "list_characters"
+	LIST_CHARACTERS      = "list_characters"
+	GET_CHARACTER        = "get_character"
+	GET_CHARACTER_QUOTES = "get_character_quotes"
+
+	LIST_MOVIES      = "list_movies"
+	GET_MOVIE        = "get_movie"
+	GET_MOVIE_QUOTES = "get_movie_quotes"
 )
